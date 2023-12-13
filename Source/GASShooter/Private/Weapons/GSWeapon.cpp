@@ -12,6 +12,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "GSBlueprintFunctionLibrary.h"
 #include "Net/UnrealNetwork.h"
+#include "UObject/CoreNet.h"
 #include "Player/GSPlayerController.h"
 
 // Sets default values
@@ -133,7 +134,7 @@ void AGSWeapon::NotifyActorBeginOverlap(AActor* Other)
 {
 	Super::NotifyActorBeginOverlap(Other);
 
-	if (!IsPendingKill() && !OwningCharacter)
+	if (IsValid(this) && !OwningCharacter)
 	{
 		PickUpOnTouch(Cast<AGSHeroCharacter>(Other));
 	}
